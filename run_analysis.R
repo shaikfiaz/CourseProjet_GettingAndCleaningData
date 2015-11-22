@@ -39,6 +39,10 @@ file.Activity.Desc=paste(DataSubFolder,"/","activity_labels.txt",sep="")
 #Feature descriptions
 
 Feature.Names=read.table(file.Features.Desc)
+Feature.Names[,2]=gsub("\\(|\\)","",Feature.Names[,2])
+Feature.Names[,2]=gsub("-","_",Feature.Names[,2])
+Feature.Names[,2]=gsub(",","_",Feature.Names[,2])
+Feature.Names[,2]=gsub("__","_",Feature.Names[,2])
 
 #Activity number and descriptions
 Activity.Desc=read.table(file.Activity.Desc)
@@ -100,7 +104,7 @@ library(reshape2)
 IDs=c("Subject","Activity")
 Measurements= c(Features.Mean,Features.Std)
 DF_Melt=melt(Data.Train.Test.Mean_n_Std,id=IDs,measure.vars = Measurements)#Melting the data
-Train_n_Test_Data_Summary=dcast(DF_Melt, Activity+Subject ~ Measurements, mean)#Summarizing the data
+Train_n_Test_Data_Summary=dcast(DF_Melt, Activity+Subject ~ variable, mean, value='value')#Summarizing the data
 
 #Writing Data to txt file
 file.Summary=paste(DataSubFolder,"/","TrainTest_with_mean_of_Mean_Std_Summary.txt",sep="")
