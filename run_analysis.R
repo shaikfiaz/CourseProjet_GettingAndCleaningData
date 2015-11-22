@@ -1,6 +1,9 @@
 library(downloader)
 DataDir="./Data"
 setwd(DataDir)
+
+
+
 file.UCIHAR=paste(DataDir,"/","UCI HAR Dataset.zip",sep = "")
 
 ## Downloading the data and creation of file tags
@@ -25,6 +28,7 @@ file.TrainSubject=paste(TrainDataFolder,"/","subject_train.txt",sep="")
 file.TestSet=paste(TestDataFolder,"/","X_test.txt",sep="")
 file.TestLabel=paste(TestDataFolder,"/","y_test.txt",sep="")
 file.TestSubject=paste(TestDataFolder,"/","subject_test.txt",sep="")
+
 #Features
 
 file.Features.Desc=paste(DataSubFolder,"/","features.txt",sep="")
@@ -92,11 +96,11 @@ Features.Std=colnames(Data.Train.Test)[Ind.Std.Feat]
 
 Features.Mean_n_Std=c(Features.Mean,Features.Std,"Subject","Activity")
 Data.Train.Test.Mean_n_Std=Data.Train.Test[,Features.Mean_n_Std]
-
-#Writing the data to txt file
-
-file.DataMeanStd=paste(DataSubFolder,"/","DataMeanStd.txt",sep="")
-write.table(Data.Train.Test.Mean_n_Std,file.DataMeanStd,col.names = TRUE,row.names = FALSE)
+#colnames(Data.Train.Test.Mean_n_Std)=gsub("\\(|\\)","_",colnames(Data.Train.Test.Mean_n_Std))
+# #Writing the data to txt file
+# 
+# file.DataMeanStd=paste(DataSubFolder,"/","DataMeanStd.txt",sep="")
+# write.table(Data.Train.Test.Mean_n_Std,file.DataMeanStd,col.names = TRUE,row.names = FALSE)
 
 ## Creating second tidy data set with with the average of each variable for each activity and each subject.
 library(reshape2)
@@ -104,7 +108,11 @@ library(reshape2)
 IDs=c("Subject","Activity")
 Measurements= c(Features.Mean,Features.Std)
 DF_Melt=melt(Data.Train.Test.Mean_n_Std,id=IDs,measure.vars = Measurements)#Melting the data
+<<<<<<< HEAD
 Train_n_Test_Data_Summary=dcast(DF_Melt, Activity+Subject ~ variable, mean, value='value')#Summarizing the data
+=======
+Train_n_Test_Data_Summary=dcast(DF_Melt, Activity+Subject ~ variable, mean,value='value')#Summarizing the data
+>>>>>>> All Files Added
 
 #Writing Data to txt file
 file.Summary=paste(DataSubFolder,"/","TrainTest_with_mean_of_Mean_Std_Summary.txt",sep="")
