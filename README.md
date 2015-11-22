@@ -9,6 +9,7 @@ This is course project in Data Science specialization in Coursera on how to get 
 * Mark the connections with features.txt, activity_labels.txt to file.Features.Desc, file.Activity.Desc, respectively.
 * Read the files using read.table command. For example X_train=read.table(file.TrainSet).
 * Activity_lables and Features are named as data frame "Activity.Desc" and "Feature.Names"
+* Feature names are cleaned by using pattern matching and "gsub" commands
 
 ## Preprocessing i.e changing the name variables, joining varaibles
 * For training data set name Measurements, Subjects, Labels as X_train, Y_train, subject_train variables, respectively
@@ -18,7 +19,7 @@ This is course project in Data Science specialization in Coursera on how to get 
 * Join the data frames X_train,Y_train,subject_train using "cbind" command and call it "Data.Train". Similarly join X_test,Y_test,subject_test data frames to "Data.Test".
 
 ## Join the Train and Test data
-* Combine Data.Train and Data.Test by using "rbind" command and name it as "Data.Train.Test
+* Combine Data.Train and Data.Test by using "rbind" command and name it as "Data.Train.Test"
 
 ## Replacing Activity numbers with activity names
 
